@@ -1,11 +1,19 @@
-import Head from "next/head";
-import Image from "next/image";
-import styles from "../styles/Home.module.css";
+import Header from "../components/header";
+import Auth from "../components/auth";
+import { useEffect, useState } from "react";
+import Discover from "../components/discover";
 
 export default function Home() {
+  const [Logged, setLogged] = useState(false);
+
+  useEffect(() => {
+    let isAuth = sessionStorage.getItem("logged");
+    if (isAuth) setLogged(true);
+  }, []);
   return (
     <>
-      <h1>Hello</h1>
+      <Header pageTitle={"Home"} />
+      {Logged ? <Discover /> : <Auth />}
     </>
   );
 }
