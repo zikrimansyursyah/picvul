@@ -1,0 +1,54 @@
+{
+  "data":[
+    {
+      "index":0,
+      "username":"nayanika22",
+      "fullname":"Adinda Nayanika",
+      "isFollowing":true,
+      "profil_img":"1O_GwmTMyeLBTw_ZLT8qTvUbMDZ-778aU",
+      "post_img_1":"1O6KaS7lfFrZxDN6RcbDyLRB9G2jApeZc",
+      "post_img_2":"1NwYaLbr--KzQ0hZFEqDPVrZrrP7mnJd9",
+      "post_img_3":"1NjMHj9u0ycy1LD2N9LRxqH-wxOi-Bjle"
+    },
+    {
+      "index":1,
+      "username":"aurelien",
+      "fullname":"Aurelien Aditya",
+      "isFollowing":false,
+      "profil_img":"1OP6i5Nb1KdCEBp4c0Wtv2uSzxykQL38J",
+      "post_img_1":"1NiXF3zWw6o7pRhBdl3ffie7pd6ORzNh8",
+      "post_img_2":"1NP0NEknocreB7DlpcMtLa9jjNupSGJtR",
+      "post_img_3":"1NNnU9Ou_GKHfv2HOwYYnLvMNQVJCVM2C"
+    },
+    {
+      "index":2,
+      "username":"fanwar",
+      "fullname":"Ferry Anwar",
+      "isFollowing":true,
+      "profil_img":"1O15SYwkw6Y9ZNjCoxC0-YAGLICUY-6Qd",
+      "post_img_1":"1NLm3qpYSKWCrS8k7lnLNXTUuXWrNSDtJ",
+      "post_img_2":"1NLMubn3UFZ7DWh1fNtshjPYs1xftatQg",
+      "post_img_3":"1O5n-M7KIBR20EM31B-yRPXi39bh4HUcZ"
+    },
+    {
+      "index":3,
+      "username":"lizza",
+      "fullname":"Lizza Mansry",
+      "isFollowing":true,
+      "profil_img":"1OW9Xm-jS8pvTYd_TwHE51hkonItwe1bF",
+      "post_img_1":"1NwoKIEVL7w5v_Aw2jafNACKIsUGvnYNb",
+      "post_img_2":"1OJ0prh98PzjYCxQdU251vDlQhQKnYbBI",
+      "post_img_3":"1OhuurlJ88HuG6GjKNljK-xaD08bOiXlb"
+    },
+    {
+      "index":4,
+      "username":"el_shafira",
+      "fullname":"El Shafira Rain",
+      "isFollowing":true,
+      "profil_img":"1N-6ghTeXhHS7E_orQhebLIdAvQI23-xI",
+      "post_img_1":"1OGfRk9D5iUVSkVP0qO48j8JGQ4mdlpHZ",
+      "post_img_2":"1Of9md6k4ncS16N6qkmA6QWzLR4eT8hAc",
+      "post_img_3":"1OM8KjS70x-DTig-F4mh015C0BTVTkF3B"
+    }
+  ]
+}

@@ -10,6 +10,7 @@ export default function Home() {
     let isAuth = sessionStorage.getItem("logged");
     if (isAuth) setLogged(true);
   }, []);
+
   return (
     <>
       <Header pageTitle={"Home"} />

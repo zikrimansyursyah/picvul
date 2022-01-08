@@ -1,9 +1,15 @@
 import Image from "next/image";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Modal from "../modal";
+import Logout from "../auth/logout";
+import User from "../../db/user.json";
+import webAssets from "../../db/assets.json";
+import Loader from "../imgLoader";
 
-export default function Layout({ pageTitle, children }) {
-  const [IsModalOpen, setIsModalOpen] = useState(false)
+export default function Layout({ children }) {
+  const [IsModalOpen, setIsModalOpen] = useState(false);
+  const email = sessionStorage.getItem("email");
+  const account = User.data.filter((v) => v.email === email) || [];
 
   return (
     <>
@@ -12,8 +18,9 @@ export default function Layout({ pageTitle, children }) {
           <div className="user flex items-center gap-3 py-4">
             <div className="user-image w-12 h-12 flex cursor-pointer group">
               <Image
+                loader={Loader}
                 className="w-full h-full object-cover rounded-lg"
-                src="/profile.JPG"
+                src={account[0].profile_image}
                 alt="profile"
                 width={100}
                 height={100}
@@ -23,8 +30,7 @@ export default function Layout({ pageTitle, children }) {
                   <a
                     className="px-4 py-1 rounded-lg text-red-500 font-semibold hover:bg-red-50 cursor-pointer"
                     onClick={() => {
-                      sessionStorage.removeItem("logged");
-                      window.location = "/";
+                      Logout();
                     }}
                   >
                     Logout
@@ -33,9 +39,9 @@ export default function Layout({ pageTitle, children }) {
               </div>
             </div>
             <div className="flex flex-col">
-              <span className="name font-semibold">Zikri Mansyursyah</span>
+              <span className="name font-semibold">{account[0].fullname}</span>
               <span className="job text-sm font-medium text-gray-400">
-                UIUX Designer
+                {account[0].job}
               </span>
             </div>
           </div>
@@ -119,7 +125,12 @@ export default function Layout({ pageTitle, children }) {
                 />
               </svg>
             </a>
-            <button onClick={() => { setIsModalOpen(true) }} className="bg-blue-400 px-7 py-3 h-10 flex items-center rounded-full text-white font-semibold hover:bg-blue-500">
+            <button
+              onClick={() => {
+                setIsModalOpen(true);
+              }}
+              className="bg-blue-400 px-7 py-3 h-10 flex items-center rounded-full text-white font-semibold hover:bg-blue-500"
+            >
               Upload
             </button>
           </div>
@@ -150,7 +161,8 @@ export default function Layout({ pageTitle, children }) {
             <div className="flex items-center gap-3">
               <div className="h-14 w-14">
                 <Image
-                  src="/picvul-logo.png"
+                  loader={Loader}
+                  src={webAssets.picvul_logo}
                   alt="picvul-logo"
                   height={100}
                   width={100}
@@ -219,11 +231,11 @@ export default function Layout({ pageTitle, children }) {
           <div className="mt-12">Documentation</div>
         </div>
       </footer>
-      {
-        IsModalOpen ?
-          <Modal setIsModalOpen={setIsModalOpen} setModal={'upload_form'} /> :
-          <div className="hidden"></div>
-      }
+      {IsModalOpen ? (
+        <Modal setIsModalOpen={setIsModalOpen} setModal={"upload_form"} />
+      ) : (
+        <div className="hidden"></div>
+      )}
     </>
   );
 }

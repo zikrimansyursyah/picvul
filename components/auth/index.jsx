@@ -3,11 +3,14 @@ import Image from "next/image";
 import Login from "./login";
 import Register from "./register";
 import Alert from "../alert";
+import webAssets from "../../db/assets.json";
+import Loader from "../imgLoader";
 
 export default function Auth() {
   const [Form, setForm] = useState(true);
   const [OpenAlert, setOpenAlert] = useState(false);
   const [AlertMessage, setAlertMessage] = useState(null);
+  const [Type, setType] = useState(null);
 
   return (
     <div className="w-screen h-screen flex">
@@ -19,7 +22,12 @@ export default function Auth() {
             setAlertMessage={setAlertMessage}
           />
         ) : (
-          <Register setForm={setForm} />
+          <Register
+            setForm={setForm}
+            setOpenAlert={setOpenAlert}
+            setAlertMessage={setAlertMessage}
+            type={setType}
+          />
         )}
       </div>
       <div className="w-1/2 h-screen hidden md:block">
@@ -28,7 +36,8 @@ export default function Auth() {
             <div className="">
               <div className="flex items-center gap-4">
                 <Image
-                  src="/picvul-logo.png"
+                  loader={Loader}
+                  src={webAssets.picvul_logo}
                   alt="picvul-logo"
                   width={50}
                   height={50}
@@ -42,7 +51,7 @@ export default function Auth() {
         </div>
       </div>
       {OpenAlert ? (
-        <Alert message={AlertMessage} setOpenAlert={setOpenAlert} />
+        <Alert message={AlertMessage} setOpenAlert={setOpenAlert} type={Type} />
       ) : (
         <div className="hidden"></div>
       )}

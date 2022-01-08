@@ -22,6 +22,7 @@ export default function Login({ setForm, setOpenAlert, setAlertMessage }) {
       )) || [];
     if (user.length > 0) {
       sessionStorage.setItem("logged", true);
+      sessionStorage.setItem("email", email);
       window.location = "/";
     } else {
       setOpenAlert(true);

@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import Image from "next/image";
 import Header from "../components/header";
+import webAssets from "../db/assets.json";
+import Loader from "../components/imgLoader";
 
 export default function NotFound() {
   const [Count, setCount] = useState(10);
@@ -23,7 +25,8 @@ export default function NotFound() {
       <div className="w-screen h-screen flex flex-col gap-2 justify-center items-center">
         <div className="flex gap-2">
           <Image
-            src="/picvul-logo.png"
+            loader={Loader}
+            src={webAssets.picvul_logo}
             alt="picvul-logo"
             width={50}
             height={50}
@@ -36,7 +39,13 @@ export default function NotFound() {
           you will automatic redirect to home on
         </div>
         <div className="time font-semibold text-lg">{Count}</div>
-        <Image src="/404.webp" alt="404-not-found" width={400} height={400} />
+        <Image
+          loader={Loader}
+          src={webAssets[404]}
+          alt="404-not-found"
+          width={400}
+          height={400}
+        />
         <h1 className=" text-5xl font-semibold">OOPS.</h1>
         <div className="text-gray-700 text-2xl text-center">
           We can&apos;t seem to find the page you are looking for

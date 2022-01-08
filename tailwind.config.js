@@ -3,7 +3,7 @@ module.exports = {
   theme: {
     extend: {
       backgroundImage: {
-        'login1': "url(/login2.webp)"
+        'login1': "url('https://drive.google.com/uc?export=view&id=1NFs9PPyTmhelRcnYzpq57X2puc9wpyUm')"
       },
     },
   },

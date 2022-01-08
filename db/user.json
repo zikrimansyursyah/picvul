@@ -4,7 +4,12 @@
       "id": 1,
       "email": "zikrimansyursyah@gmail.com",
       "username": "zikri",
-      "password": "zikri123456"
+      "fullname":"Zikri Mansyursyah",
+      "password": "zikri123456",
+      "job":"UIUX Designer",
+      "following": ["liza@gmail.com","ibnu@gmail.com"],
+      "follower": ["mulyadi@gmail.com","faisal@gmail.com"],
+      "profile_image": "1N6IFRnKR6rBAupZgJPIpLyZFznoOakgW"
     }
   ]
 }
