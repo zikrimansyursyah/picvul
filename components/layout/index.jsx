@@ -3,7 +3,7 @@ import Image from "next/image";
 export default function Layout({ pageTitle, children }) {
   return (
     <>
-      <nav className="border-b fixed w-screen glass z-20">
+      <nav className="border-b fixed w-screen glass z-40">
         <div className="container mx-auto flex justify-between px-3">
           <div className="user flex items-center gap-3 py-4">
             <div className="user-image w-12 h-12 flex cursor-pointer group">

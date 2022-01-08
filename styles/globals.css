@@ -2,10 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 @font-face {
-  font-family: "Gadamer";
-  src: url(../public/Gadamer.ttf);
-}
-@font-face {
   font-family: "Ubuntu";
   src: url(../public/Ubuntu.ttf);
 }
@@ -16,6 +12,7 @@ body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  background: #fafafa;
 }
 
 a {
@@ -25,10 +22,6 @@ a {
 
 * {
   box-sizing: border-box;
-}
-
-.font-gadamer {
-  font-family: "Gadamer";
 }
 
 .font-ubuntu {
@@ -43,4 +36,43 @@ a {
   );
   box-shadow: inset -5px -5px 250px rgba(255, 255, 255, 0.02);
   backdrop-filter: blur(42px);
+}
+
+@-webkit-keyframes scale-up-hor-left {
+  0% {
+    -webkit-transform: scaleX(0.4);
+    transform: scaleX(0.4);
+    -webkit-transform-origin: 0% 0%;
+    transform-origin: 0% 0%;
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: scaleX(1);
+    transform: scaleX(1);
+    -webkit-transform-origin: 0% 0%;
+    transform-origin: 0% 0%;
+    opacity: 1;
+  }
+}
+@keyframes scale-up-hor-left {
+  0% {
+    -webkit-transform: scaleX(0.4);
+    transform: scaleX(0.4);
+    -webkit-transform-origin: 0% 0%;
+    transform-origin: 0% 0%;
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: scaleX(1);
+    transform: scaleX(1);
+    -webkit-transform-origin: 0% 0%;
+    transform-origin: 0% 0%;
+    opacity: 1;
+  }
+}
+
+.scale-up-hor-left {
+  -webkit-animation: scale-up-hor-left 2s cubic-bezier(0.39, 0.575, 0.565, 1)
+    both;
+  animation: scale-up-hor-left 2s cubic-bezier(0.39, 0.575, 0.565, 1) both;
 }
