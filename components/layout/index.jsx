@@ -1,6 +1,10 @@
 import Image from "next/image";
+import { useState } from "react";
+import Modal from "../modal";
 
 export default function Layout({ pageTitle, children }) {
+  const [IsModalOpen, setIsModalOpen] = useState(false)
+
   return (
     <>
       <nav className="border-b fixed w-screen glass z-40">
@@ -115,7 +119,7 @@ export default function Layout({ pageTitle, children }) {
                 />
               </svg>
             </a>
-            <button className="bg-blue-400 px-7 py-3 h-10 flex items-center rounded-full text-white font-semibold hover:bg-blue-500">
+            <button onClick={() => { setIsModalOpen(true) }} className="bg-blue-400 px-7 py-3 h-10 flex items-center rounded-full text-white font-semibold hover:bg-blue-500">
               Upload
             </button>
           </div>
@@ -215,6 +219,11 @@ export default function Layout({ pageTitle, children }) {
           <div className="mt-12">Documentation</div>
         </div>
       </footer>
+      {
+        IsModalOpen ?
+          <Modal setIsModalOpen={setIsModalOpen} setModal={'upload_form'} /> :
+          <div className="hidden"></div>
+      }
     </>
   );
 }
