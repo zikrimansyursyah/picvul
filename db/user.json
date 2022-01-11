@@ -9,7 +9,35 @@
       "job":"UIUX Designer",
       "following": ["liza@gmail.com","ibnu@gmail.com"],
       "follower": ["mulyadi@gmail.com","faisal@gmail.com"],
-      "profile_image": "1N6IFRnKR6rBAupZgJPIpLyZFznoOakgW"
+      "profile_image": "/cdn/webassets/profile.JPG"
+    },
+    {
+      "id":2,
+      "email":"nayanika@cravty.com",
+      "password":"nayanika123",
+      "username":"nayanika22",
+      "fullname":"Adinda Nayanika",
+      "job":"Product Manager",
+      "following":["zikrimansyursyah@gmail.com"],
+      "follower":["zikrimansyursyah@gmail.com"],
+      "profile_image":"/cdn/public/nayanika.webp",
+      "post":[
+        {
+          "id":500,
+          "post_img":"/cdn/public/pic1.webp",
+          "description":"post ke 1 Nayanika"
+        },
+        {
+          "id":501,
+          "post_img":"/cdn/public/pic2.webp",
+          "description":"Post ke 2 Nayanika"
+        },
+        {
+          "id":502,
+          "post_img":"/cdn/public/pic3.webp",
+          "description":"Post ke 2 Nayanika"
+        } 
+      ]
     }
   ]
 }

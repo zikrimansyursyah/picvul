@@ -1,8 +1,8 @@
-import Image from "next/image";
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import "react-lazy-load-image-component/src/effects/blur.css";
 import { useState } from "react";
 import UpdatesData from "../../db/updates.json";
 import Link from "next/link";
-import Loader from "../imgLoader";
 
 export default function Updates() {
   const [HideUpdates, setHideUpdates] = useState(false);
@@ -83,59 +83,59 @@ const UpdatesCard = ({
 
   return (
     <div className="content pt-2 max-w-max scale-up-hor-left">
-      <div className="absolute translate-y-2 h-16 w-16 border-2 border-white rounded-full z-10">
+      <div className="absolute translate-y-2 h-16 w-16 overflow-hidden border-2 border-white rounded-full z-10">
         <Link href={`/${username}`}>
           <a>
-            <Image
-              loader={Loader}
-              className="rounded-full object-cover"
+            <LazyLoadImage
+              className="h-full w-full object-cover"
               src={profile_img}
               alt="profile"
-              width={100}
-              height={100}
+              width="100%"
+              height="100%"
+              effect="blur"
             />
           </a>
         </Link>
       </div>
       <div className="flex gap-1 pl-8 mb-2">
-        <div className="h-20 w-20">
+        <div className="h-20 w-20 rounded-md overflow-hidden">
           <Link href={`/${username}/${Math.floor(Math.random() * 10000)}`}>
             <a>
-              <Image
-                loader={Loader}
-                className="rounded-lg object-cover"
+              <LazyLoadImage
+                className="h-full w-full object-cover"
                 src={post1}
-                alt="pic1"
-                height={100}
-                width={100}
+                alt="post1"
+                width="100%"
+                height="100%"
+                effect="blur"
               />
             </a>
           </Link>
         </div>
-        <div className="h-20 w-20">
+        <div className="h-20 w-20 rounded-md overflow-hidden">
           <Link href={`/${username}/${Math.floor(Math.random() * 10000)}`}>
             <a>
-              <Image
-                loader={Loader}
-                className="rounded-lg object-cover"
+              <LazyLoadImage
+                className="h-full w-full object-cover"
                 src={post2}
-                alt="pic1"
-                height={100}
-                width={100}
+                alt="post2"
+                width="100%"
+                height="100%"
+                effect="blur"
               />
             </a>
           </Link>
         </div>
-        <div className="h-20 w-20">
+        <div className="h-20 w-20 rounded-md overflow-hidden">
           <Link href={`/${username}/${Math.floor(Math.random() * 10000)}`}>
             <a>
-              <Image
-                loader={Loader}
-                className="rounded-lg object-cover"
+              <LazyLoadImage
+                className="h-full w-full object-cover"
                 src={post3}
-                alt="pic1"
-                height={100}
-                width={100}
+                alt="post3"
+                width="100%"
+                height="100%"
+                effect="blur"
               />
             </a>
           </Link>

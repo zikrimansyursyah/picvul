@@ -1,9 +1,8 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
-import Image from "next/image";
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import "react-lazy-load-image-component/src/effects/blur.css";
 import Header from "../components/header";
-import webAssets from "../db/assets.json";
-import Loader from "../components/imgLoader";
 
 export default function NotFound() {
   const [Count, setCount] = useState(10);
@@ -24,9 +23,8 @@ export default function NotFound() {
       <Header pageTitle={"404 Not Found"} />
       <div className="w-screen h-screen flex flex-col gap-2 justify-center items-center">
         <div className="flex gap-2">
-          <Image
-            loader={Loader}
-            src={webAssets.picvul_logo}
+          <LazyLoadImage
+            src="/cdn/webassets/picvul-logo.png"
             alt="picvul-logo"
             width={50}
             height={50}
@@ -39,9 +37,8 @@ export default function NotFound() {
           you will automatic redirect to home on
         </div>
         <div className="time font-semibold text-lg">{Count}</div>
-        <Image
-          loader={Loader}
-          src={webAssets[404]}
+        <LazyLoadImage
+          src="/cdn/webassets/404.webp"
           alt="404-not-found"
           width={400}
           height={400}

@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Button from "../button";
 import { useState } from "react";
+import { useRouter } from "next/router";
 import { useFormik } from "formik";
 import * as yup from "yup";
 const validationSchema = yup.object().shape({
@@ -11,8 +12,9 @@ const validationSchema = yup.object().shape({
 //hanya data dummy, cek consume api
 import Database from "../../db/user.json";
 
-export default function Login({ setForm, setOpenAlert, setAlertMessage }) {
+export default function Login({ setForm, setAlert }) {
   const [ShowPassword, setShowPassword] = useState(false);
+  const router = useRouter();
 
   const handleLogin = async (e) => {
     const { email, password } = formik.values;
@@ -23,10 +25,13 @@ export default function Login({ setForm, setOpenAlert, setAlertMessage }) {
     if (user.length > 0) {
       sessionStorage.setItem("logged", true);
       sessionStorage.setItem("email", email);
-      window.location = "/";
+      router.reload();
     } else {
-      setOpenAlert(true);
-      setAlertMessage("email or password wrong");
+      setAlert({
+        type: false,
+        message: "Username or Password is incorrect",
+        isOpen: true,
+      });
     }
   };
 

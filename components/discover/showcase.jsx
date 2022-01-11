@@ -1,15 +1,15 @@
 import { useState } from "react";
-import Image from "next/image";
 import Link from "next/link";
-import Loader from "../imgLoader";
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import "react-lazy-load-image-component/src/effects/blur.css";
 import ShowcaseDB from "../../db/showcase.json";
 
 export default function Showcase() {
   return (
     <div className="font-semibold pb-20">
       <h1>Picvul Showcase</h1>
-      <div className="menu flex justify-between mt-4">
-        <button className="flex items-center gap-2 border py-2 px-3 rounded-full text-gray-800">
+      <div className="menu flex gap-5 justify-between mt-4">
+        <button className="flex items-center gap-2 border py-2 px-3 h-fit rounded-full text-gray-800 group">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             className="h-4 w-4"
@@ -39,31 +39,38 @@ export default function Showcase() {
               d="M19 9l-7 7-7-7"
             />
           </svg>
+          <div className="absolute -translate-x-3 translate-y-24 pt-8 hidden group-hover:block z-20">
+            <div className="bg-white shadow-2xl px-5 py-4 w-32 border text-left rounded-xl cursor-default flex flex-col gap-2 text-sm font-semibold">
+              <div className="px-2 py-1 rounded-lg bg-blue-100/80 hover:bg-blue-100/80 cursor-pointer">
+                Popular
+              </div>
+              <div className="px-2 py-1 rounded-lg hover:bg-blue-100/80 cursor-pointer">
+                Latest
+              </div>
+              <div className="px-2 py-1 rounded-lg hover:bg-blue-100/80 cursor-pointer">
+                Date
+              </div>
+              <div className="px-2 py-1 rounded-lg hover:bg-blue-100/80 cursor-pointer">
+                Related
+              </div>
+            </div>
+          </div>
         </button>
-        <div className="menu-list flex gap-5">
-          <button className="border px-3 rounded-full border-transparent bg-slate-800 text-white">
-            All Categories
-          </button>
-          <button className="border px-3 rounded-full border-transparent bg-white hover:bg-slate-800 hover:text-white motion-safe:duration-500">
-            3D Design
-          </button>
-          <button className="border px-3 rounded-full border-transparent bg-white hover:bg-slate-800 hover:text-white motion-safe:duration-500">
-            Product Design
-          </button>
-          <button className="border px-3 rounded-full border-transparent bg-white hover:bg-slate-800 hover:text-white motion-safe:duration-500">
-            Illustration
-          </button>
-          <button className="border px-3 rounded-full border-transparent bg-white hover:bg-slate-800 hover:text-white motion-safe:duration-500">
-            NFT
-          </button>
-          <button className="border px-3 rounded-full border-transparent bg-white hover:bg-slate-800 hover:text-white motion-safe:duration-500">
-            UIUX Design
-          </button>
-          <button className="border px-3 rounded-full border-transparent bg-white hover:bg-slate-800 hover:text-white motion-safe:duration-500">
-            Animation
-          </button>
+        <div className="menu-list category gap-5 hidden overflow-x-auto lg:flex">
+          {ShowcaseDB.category.map((e) => (
+            <button
+              key={e}
+              className={`border px-3 py-1.5 rounded-full ${
+                e == "All Categories"
+                  ? "border-transparent bg-slate-800 text-white"
+                  : ""
+              }  whitespace-nowrap hover:bg-slate-800 hover:text-white hover:motion-safe:duration-500`}
+            >
+              {e}
+            </button>
+          ))}
         </div>
-        <button className="flex items-center gap-2 border py-2 pl-3 pr-4 rounded-full text-gray-800">
+        <button className="flex items-center gap-2 h-fit border py-2 pl-3 pr-4 rounded-full text-gray-800 group">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             className="h-4 w-4"
@@ -79,13 +86,29 @@ export default function Showcase() {
             />
           </svg>
           <div className="font-semibold text-sm">Filters</div>
+          <div className="absolute -translate-x-16 translate-y-24 pt-8 hidden group-hover:block z-20">
+            <div className="bg-white shadow-2xl px-5 py-4 border text-left rounded-xl cursor-default flex flex-col gap-2 text-sm font-semibold whitespace-nowrap">
+              <div className="px-2 py-1 rounded-lg bg-blue-100/80 hover:bg-blue-100/80 cursor-pointer">
+                All Categories
+              </div>
+              <div className="px-2 py-1 rounded-lg hover:bg-blue-100/80 cursor-pointer">
+                NFT
+              </div>
+              <div className="px-2 py-1 rounded-lg hover:bg-blue-100/80 cursor-pointer">
+                UIUX Design
+              </div>
+              <div className="px-2 py-1 rounded-lg hover:bg-blue-100/80 cursor-pointer">
+                3D Design
+              </div>
+            </div>
+          </div>
         </button>
       </div>
       <div className="container mx-auto flex flex-col">
-        <div className="grid grid-cols-4 gap-6 pt-5">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 pt-5">
           {ShowcaseDB.data.map((e) => (
             <Card
-              key={e.username}
+              key={e.index}
               username={e.username}
               fullname={e.fullname}
               isFollowing={e.isFollowing}
@@ -115,16 +138,15 @@ const Card = ({
   const [FollowState, setFollowState] = useState(isFollowing);
 
   return (
-    <div className="card p-1.5 bg-white h-fit rounded-xl group hover:scale-105 hover:motion-safe:duration-500 hover:shadow-2xl">
-      <div className="h-40 rounded-xl flex flex-col group-hover:shadow-lg">
-        <Image
-          className="rounded-xl object-cover"
-          loader={Loader}
-          src={post_img}
+    <div className="card p-2 md:p-1.5 bg-white border h-fit rounded-xl group md:hover:scale-105 md:hover:motion-safe:duration-500 md:hover:shadow-2xl">
+      <div className="h-80 lg:h-60 rounded-xl overflow-hidden flex flex-col shadow-lg">
+        <LazyLoadImage
+          className="h-full w-full object-cover"
           alt={`${username}_post`}
-          height={100}
-          width={100}
-          layout="responsive"
+          effect="blur"
+          height="100%"
+          width="100%"
+          src={post_img}
         />
         {Like ? (
           <a
@@ -168,22 +190,21 @@ const Card = ({
           </a>
         )}
         <Link href={`/${username}/${Math.floor(Math.random() * 10000)}`}>
-          <a className="absolute translate-y-14 py-1.5 px-3 rounded-full bg-white font-semibold w-fit text-sm self-center mt-5 hidden group-hover:block hover:scale-105 hover:motion-safe:duration-500">
+          <a className="absolute translate-y-32 lg:translate-y-24 py-1.5 px-3 rounded-full bg-white font-semibold w-fit text-sm self-center mt-5 hidden group-hover:block hover:scale-105 hover:motion-safe:duration-500">
             Details
           </a>
         </Link>
       </div>
-      <div className="absolute -translate-y-6 translate-x-2 border-2 border-white rounded-full h-12 w-12">
+      <div className="absolute -translate-y-6 translate-x-2 border-2 overflow-hidden border-white rounded-full h-12 w-12">
         <Link href={`/${username}`}>
           <a>
-            <Image
-              className="rounded-full object-cover"
-              loader={Loader}
+            <LazyLoadImage
+              className="h-full w-full object-cover"
               src={profil_img}
+              effect="blur"
+              height="100%"
+              width="100%"
               alt={`${username}_profile`}
-              width={100}
-              height={100}
-              layout="responsive"
             />
           </a>
         </Link>

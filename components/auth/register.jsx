@@ -13,12 +13,7 @@ const validationSchema = yup.object().shape({
 //hanya data dummy, cek consume api
 import Database from "../../db/user.json";
 
-export default function Register({
-  setForm,
-  setOpenAlert,
-  setAlertMessage,
-  setType,
-}) {
+export default function Register({ setForm, setAlert }) {
   const [ShowPassword, setShowPassword] = useState(false);
   const [ShowPassword2, setShowPassword2] = useState(false);
 
@@ -29,8 +24,11 @@ export default function Register({
         (v) => v.email === email || v.username === username
       )) || [];
     if (user.length > 0) {
-      setOpenAlert(true);
-      setAlertMessage("User already exist");
+      setAlert({
+        type: false,
+        message: "User already exist",
+        isOpen: true,
+      });
     } else {
       const id = Math.floor(Math.random() * Date.now());
       Database.data.push({
@@ -39,11 +37,12 @@ export default function Register({
         username: username,
         password: password,
       });
-      window.location = "/";
-
-      setOpenAlert(true);
-      setAlertMessage("Registration Success");
-      setType("ok");
+      setAlert({
+        type: true,
+        message: "Register Success",
+        isOpen: true,
+      });
+      setForm(true);
     }
   };
 

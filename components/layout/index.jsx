@@ -1,10 +1,9 @@
-import Image from "next/image";
-import { useState, useEffect } from "react";
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import "react-lazy-load-image-component/src/effects/blur.css";
+import { useState } from "react";
 import Modal from "../modal";
 import Logout from "../auth/logout";
 import User from "../../db/user.json";
-import webAssets from "../../db/assets.json";
-import Loader from "../imgLoader";
 
 export default function Layout({ children }) {
   const [IsModalOpen, setIsModalOpen] = useState(false);
@@ -17,13 +16,13 @@ export default function Layout({ children }) {
         <div className="container mx-auto flex justify-between px-3">
           <div className="user flex items-center gap-3 py-4">
             <div className="user-image w-12 h-12 flex cursor-pointer group">
-              <Image
-                loader={Loader}
-                className="w-full h-full object-cover rounded-lg"
+              <LazyLoadImage
+                className="h-full w-full object-cover rounded-md"
                 src={account[0].profile_image}
                 alt="profile"
-                width={100}
-                height={100}
+                effect="blur"
+                width="100%"
+                height="100%"
               />
               <div className="user-action hidden group-hover:block hover:block absolute translate-y-12 pt-3 cursor-default z-10">
                 <div className="border bg-white p-5 rounded-lg shadow-lg">
@@ -80,9 +79,9 @@ export default function Layout({ children }) {
               stroke="currentColor"
             >
               <path
-                strokelinecap="round"
-                strokelinejoin="round"
-                strokewidth={2}
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
                 d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
               />
             </svg>
@@ -102,9 +101,9 @@ export default function Layout({ children }) {
                 stroke="currentColor"
               >
                 <path
-                  strokelinecap="round"
-                  strokelinejoin="round"
-                  strokewidth={2}
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
                   d="M13 10V3L4 14h7v7l9-11h-7z"
                 />
               </svg>
@@ -118,9 +117,9 @@ export default function Layout({ children }) {
                 stroke="currentColor"
               >
                 <path
-                  strokelinecap="round"
-                  strokelinejoin="round"
-                  strokewidth={2}
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
                   d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4"
                 />
               </svg>
@@ -143,9 +142,9 @@ export default function Layout({ children }) {
               stroke="currentColor"
             >
               <path
-                strokelinecap="round"
-                strokelinejoin="round"
-                strokewidth={2}
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
                 d="M4 8h16M4 16h16"
               />
             </svg>
@@ -160,12 +159,13 @@ export default function Layout({ children }) {
           <div className="flex flex-col gap-5">
             <div className="flex items-center gap-3">
               <div className="h-14 w-14">
-                <Image
-                  loader={Loader}
-                  src={webAssets.picvul_logo}
+                <LazyLoadImage
+                  className="h-full w-full object-cover"
+                  src="/cdn/webassets/picvul-logo.png"
                   alt="picvul-logo"
-                  height={100}
-                  width={100}
+                  effect="blur"
+                  width="100%"
+                  height="100%"
                 />
               </div>
               <h1 className="text-slate-700 text-4xl font-bold font-ubuntu">

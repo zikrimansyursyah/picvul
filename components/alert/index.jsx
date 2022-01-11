@@ -1,6 +1,6 @@
-export default function Alert({ message, setOpenAlert, type }) {
+export default function Alert({ setAlert, isOpen }) {
   setTimeout(() => {
-    setOpenAlert(false);
+    isOpen({ isOpen: false });
   }, 5000);
 
   return (
@@ -8,7 +8,7 @@ export default function Alert({ message, setOpenAlert, type }) {
       <div className="bg-white px-2 py-1 shadow-lg rounded-md flex gap-3">
         <div
           className={`flex items-center gap-5 border-l-4 rounded-sm pl-2 ${
-            type == "ok" ? "border-green-300" : "border-amber-300"
+            setAlert.type ? "border-green-300" : "border-amber-300"
           }`}
         >
           <svg
@@ -17,21 +17,23 @@ export default function Alert({ message, setOpenAlert, type }) {
             height="24"
             fill="currentColor"
             viewBox="0 0 16 16"
-            className={`${type == "ok" ? "text-green-300" : "text-amber-300"}`}
+            className={`${setAlert.type ? "text-green-300" : "text-amber-300"}`}
           >
             <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8 4a.905.905 0 0 0-.9.995l.35 3.507a.552.552 0 0 0 1.1 0l.35-3.507A.905.905 0 0 0 8 4zm.002 6a1 1 0 1 0 0 2 1 1 0 0 0 0-2z" />
           </svg>
           <div className="flex flex-col py-2">
-            <div className="font-semibold">Uh oh, something went wrong</div>
-            <div className="text-gray-600">{message}</div>
+            <div className="font-semibold">
+              {setAlert.type ? "Hooray" : "Uh oh, something went wrong"}
+            </div>
+            <div className="text-gray-600">{setAlert.message}</div>
           </div>
         </div>
         <button
           className={`px-2 rounded-lg ${
-            type == "ok" ? "hover:bg-green-100" : "hover:bg-amber-100"
+            setAlert.type ? "hover:bg-green-100" : "hover:bg-amber-100"
           }`}
           onClick={() => {
-            setOpenAlert(false);
+            isOpen({ isOpen: false });
           }}
         >
           <svg

@@ -37,6 +37,34 @@ a {
   backdrop-filter: blur(42px);
 }
 
+.category::-webkit-scrollbar {
+  width: 12px; /* width of the entire scrollbar */
+}
+
+.category::-webkit-scrollbar-track {
+  background: transparent; /* color of the tracking area */
+}
+
+.category::-webkit-scrollbar-thumb {
+  background-color: rgb(240, 240, 240); /* color of the scroll thumb */
+  border-radius: 30px; /* roundness of the scroll thumb */
+  border: 3px solid white; /* creates padding around scroll thumb */
+}
+
+body::-webkit-scrollbar {
+  width: 16px; /* width of the entire scrollbar */
+}
+
+body::-webkit-scrollbar-track {
+  background: #f7f7f7; /* color of the tracking area */
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: #ddd; /* color of the scroll thumb */
+  border-radius: 30px; /* roundness of the scroll thumb */
+  border: 3px solid #f7f7f7; /* creates padding around scroll thumb */
+}
+
 @-webkit-keyframes scale-up-hor-left {
   0% {
     -webkit-transform: scaleX(0.4);

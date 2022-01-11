@@ -13,7 +13,7 @@ export default function Layout({ pageTitle }) {
         <title>Picvul | {pageTitle} </title>
         <link
           rel="shortcut icon"
-          href="https://drive.google.com/uc?export=view&id=1NBDGJFbZ0o0FGd2Au39DgGDQD8d74xHI"
+          href="/cdn/webassets/picvul-logo.ico"
           type="image/x-icon"
         />
       </Head>
