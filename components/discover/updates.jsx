@@ -1,5 +1,4 @@
-import { LazyLoadImage } from "react-lazy-load-image-component";
-import "react-lazy-load-image-component/src/effects/blur.css";
+import Image from "next/image";
 import { useState } from "react";
 import UpdatesData from "../../db/updates.json";
 import Link from "next/link";
@@ -86,13 +85,15 @@ const UpdatesCard = ({
       <div className="absolute translate-y-2 h-16 w-16 overflow-hidden border-2 border-white rounded-full z-10">
         <Link href={`/${username}`}>
           <a>
-            <LazyLoadImage
-              className="h-full w-full object-cover"
+            <Image
               src={profile_img}
-              alt="profile"
-              width="100%"
-              height="100%"
-              effect="blur"
+              alt={`${username}_profile`}
+              height={100}
+              width={100}
+              blurDataURL="/cdn/webassets/loading.webp"
+              placeholder="blur"
+              layout="responsive"
+              className="object-cover"
             />
           </a>
         </Link>
@@ -101,13 +102,15 @@ const UpdatesCard = ({
         <div className="h-20 w-20 rounded-md overflow-hidden">
           <Link href={`/${username}/${Math.floor(Math.random() * 10000)}`}>
             <a>
-              <LazyLoadImage
-                className="h-full w-full object-cover"
+              <Image
                 src={post1}
-                alt="post1"
-                width="100%"
-                height="100%"
-                effect="blur"
+                alt={`${username}_post1`}
+                height={100}
+                width={100}
+                blurDataURL="/cdn/webassets/loading.webp"
+                placeholder="blur"
+                layout="responsive"
+                className="object-cover"
               />
             </a>
           </Link>
@@ -115,13 +118,15 @@ const UpdatesCard = ({
         <div className="h-20 w-20 rounded-md overflow-hidden">
           <Link href={`/${username}/${Math.floor(Math.random() * 10000)}`}>
             <a>
-              <LazyLoadImage
-                className="h-full w-full object-cover"
+              <Image
                 src={post2}
-                alt="post2"
-                width="100%"
-                height="100%"
-                effect="blur"
+                alt={`${username}_post2`}
+                height={100}
+                width={100}
+                blurDataURL="/cdn/webassets/loading.webp"
+                placeholder="blur"
+                layout="responsive"
+                className="object-cover"
               />
             </a>
           </Link>
@@ -129,13 +134,15 @@ const UpdatesCard = ({
         <div className="h-20 w-20 rounded-md overflow-hidden">
           <Link href={`/${username}/${Math.floor(Math.random() * 10000)}`}>
             <a>
-              <LazyLoadImage
-                className="h-full w-full object-cover"
+              <Image
                 src={post3}
-                alt="post3"
-                width="100%"
-                height="100%"
-                effect="blur"
+                alt={`${username}_post3`}
+                height={100}
+                width={100}
+                blurDataURL="/cdn/webassets/loading.webp"
+                placeholder="blur"
+                layout="responsive"
+                className="object-cover"
               />
             </a>
           </Link>

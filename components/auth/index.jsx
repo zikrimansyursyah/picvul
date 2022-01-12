@@ -1,6 +1,5 @@
 import { useState } from "react";
-import { LazyLoadImage } from "react-lazy-load-image-component";
-import "react-lazy-load-image-component/src/effects/blur.css";
+import Image from "next/image";
 import Login from "./login";
 import Register from "./register";
 import Alert from "../alert";
@@ -27,11 +26,13 @@ export default function Auth() {
           <div className=" w-fit p-5 bg-gradient-to-b from-white/50 to-gray-100/40 backdrop-blur-xs rounded-sm">
             <div className="">
               <div className="flex items-center gap-4">
-                <LazyLoadImage
+                <Image
                   src="/cdn/webassets/picvul-logo.png"
                   alt="picvul-logo"
                   width={50}
                   height={50}
+                  blurDataURL="/cdn/webassets/loading.webp"
+                  placeholder="blur"
                 />
                 <div className="h-10 pl-4 border-l font-semibold font-primary text-lg text-gray-900 flex items-center">
                   Designed by Zikri Mansyursyah

@@ -1,7 +1,6 @@
 import { useState } from "react";
 import Link from "next/link";
-import { LazyLoadImage } from "react-lazy-load-image-component";
-import "react-lazy-load-image-component/src/effects/blur.css";
+import Image from "next/image";
 import ShowcaseDB from "../../db/showcase.json";
 
 export default function Showcase() {
@@ -140,14 +139,18 @@ const Card = ({
   return (
     <div className="card p-2 md:p-1.5 bg-white border h-fit rounded-xl group md:hover:scale-105 md:hover:motion-safe:duration-500 md:hover:shadow-2xl">
       <div className="h-80 lg:h-60 rounded-xl overflow-hidden flex flex-col shadow-lg">
-        <LazyLoadImage
-          className="h-full w-full object-cover"
-          alt={`${username}_post`}
-          effect="blur"
-          height="100%"
-          width="100%"
-          src={post_img}
-        />
+        <div>
+          <Image
+            src={post_img}
+            alt={`${username}_post`}
+            height={100}
+            width={100}
+            blurDataURL="/cdn/webassets/loading.webp"
+            placeholder="blur"
+            layout="responsive"
+            className="object-cover object-bottom"
+          />
+        </div>
         {Like ? (
           <a
             onClick={() => {
@@ -198,13 +201,15 @@ const Card = ({
       <div className="absolute -translate-y-6 translate-x-2 border-2 overflow-hidden border-white rounded-full h-12 w-12">
         <Link href={`/${username}`}>
           <a>
-            <LazyLoadImage
-              className="h-full w-full object-cover"
+            <Image
               src={profil_img}
-              effect="blur"
-              height="100%"
-              width="100%"
               alt={`${username}_profile`}
+              height={100}
+              width={100}
+              blurDataURL="/cdn/webassets/loading.webp"
+              placeholder="blur"
+              layout="responsive"
+              className="object-cover"
             />
           </a>
         </Link>

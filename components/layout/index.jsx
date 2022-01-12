@@ -1,5 +1,4 @@
-import { LazyLoadImage } from "react-lazy-load-image-component";
-import "react-lazy-load-image-component/src/effects/blur.css";
+import Image from "next/image";
 import { useState } from "react";
 import Modal from "../modal";
 import Logout from "../auth/logout";
@@ -16,13 +15,14 @@ export default function Layout({ children }) {
         <div className="container mx-auto flex justify-between px-3">
           <div className="user flex items-center gap-3 py-4">
             <div className="user-image w-12 h-12 flex cursor-pointer group">
-              <LazyLoadImage
-                className="h-full w-full object-cover rounded-md"
+              <Image
+                className="object-cover rounded-md"
                 src={account[0].profile_image}
                 alt="profile"
-                effect="blur"
-                width="100%"
-                height="100%"
+                width={100}
+                height={100}
+                blurDataURL="/cdn/webassets/loading.webp"
+                placeholder="blur"
               />
               <div className="user-action hidden group-hover:block hover:block absolute translate-y-12 pt-3 cursor-default z-10">
                 <div className="border bg-white p-5 rounded-lg shadow-lg">
@@ -159,13 +159,15 @@ export default function Layout({ children }) {
           <div className="flex flex-col gap-5">
             <div className="flex items-center gap-3">
               <div className="h-14 w-14">
-                <LazyLoadImage
-                  className="h-full w-full object-cover"
+                <Image
+                  className="object-cover"
                   src="/cdn/webassets/picvul-logo.png"
                   alt="picvul-logo"
-                  effect="blur"
-                  width="100%"
-                  height="100%"
+                  width={100}
+                  height={100}
+                  blurDataURL="/cdn/webassets/loading.webp"
+                  placeholder="blur"
+                  layout="responsive"
                 />
               </div>
               <h1 className="text-slate-700 text-4xl font-bold font-ubuntu">
