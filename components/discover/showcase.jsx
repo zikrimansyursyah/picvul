@@ -1,7 +1,9 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import ShowcaseDB from "../../db/showcase.json";
+import Follow from "../../db/follow.json"
+import Likes from "../../db/likes.json"
 
 export default function Showcase() {
   return (
@@ -40,18 +42,13 @@ export default function Showcase() {
           </svg>
           <div className="absolute -translate-x-3 translate-y-24 pt-8 hidden group-hover:block z-20">
             <div className="bg-white shadow-2xl px-5 py-4 w-32 border text-left rounded-xl cursor-default flex flex-col gap-2 text-sm font-semibold">
-              <div className="px-2 py-1 rounded-lg bg-blue-100/80 hover:bg-blue-100/80 cursor-pointer">
-                Popular
-              </div>
-              <div className="px-2 py-1 rounded-lg hover:bg-blue-100/80 cursor-pointer">
-                Latest
-              </div>
-              <div className="px-2 py-1 rounded-lg hover:bg-blue-100/80 cursor-pointer">
-                Date
-              </div>
-              <div className="px-2 py-1 rounded-lg hover:bg-blue-100/80 cursor-pointer">
-                Related
-              </div>
+              {
+                ['Popular', 'Latest', 'Date', 'Related'].map((e, idx) => (
+                  <div key={idx} className={`px-2 py-1 rounded-lg hover:bg-blue-100/80 cursor-pointer ${idx === 0 ? 'bg-blue-100/80' : ''}`}>
+                    {e}
+                  </div>
+                ))
+              }
             </div>
           </div>
         </button>
@@ -59,11 +56,10 @@ export default function Showcase() {
           {ShowcaseDB.category.map((e) => (
             <button
               key={e}
-              className={`border px-3 py-1.5 rounded-full ${
-                e == "All Categories"
-                  ? "border-transparent bg-slate-800 text-white"
-                  : ""
-              }  whitespace-nowrap hover:bg-slate-800 hover:text-white hover:motion-safe:duration-500`}
+              className={`border px-3 py-1.5 rounded-full ${e == "All Categories"
+                ? "border-transparent bg-slate-800 text-white"
+                : ""
+                }  whitespace-nowrap hover:bg-slate-800 hover:text-white hover:motion-safe:duration-500`}
             >
               {e}
             </button>
@@ -87,18 +83,13 @@ export default function Showcase() {
           <div className="font-semibold text-sm">Filters</div>
           <div className="absolute -translate-x-16 translate-y-24 pt-8 hidden group-hover:block z-20">
             <div className="bg-white shadow-2xl px-5 py-4 border text-left rounded-xl cursor-default flex flex-col gap-2 text-sm font-semibold whitespace-nowrap">
-              <div className="px-2 py-1 rounded-lg bg-blue-100/80 hover:bg-blue-100/80 cursor-pointer">
-                All Categories
-              </div>
-              <div className="px-2 py-1 rounded-lg hover:bg-blue-100/80 cursor-pointer">
-                NFT
-              </div>
-              <div className="px-2 py-1 rounded-lg hover:bg-blue-100/80 cursor-pointer">
-                UIUX Design
-              </div>
-              <div className="px-2 py-1 rounded-lg hover:bg-blue-100/80 cursor-pointer">
-                3D Design
-              </div>
+              {
+                ['All Categories', 'NFT', 'UIUX Design', '3D Design'].map((e, idx) => (
+                  <div className={`px-2 py-1 rounded-lg hover:bg-blue-100/80 cursor-pointer ${idx === 0 ? 'bg-blue-100/80' : ''}`}>
+                    {e}
+                  </div>
+                ))
+              }
             </div>
           </div>
         </button>
@@ -107,13 +98,12 @@ export default function Showcase() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 pt-5">
           {ShowcaseDB.data.map((e) => (
             <Card
-              key={e.index}
+              key={e.id}
+              id={e.id}
               username={e.username}
               fullname={e.fullname}
-              isFollowing={e.isFollowing}
               profil_img={e.profil_img}
               post_img={e.post_img}
-              isLike={e.isLike}
             />
           ))}
         </div>
@@ -126,16 +116,19 @@ export default function Showcase() {
 }
 
 const Card = ({
+  id,
   username,
   fullname,
-  isFollowing,
   profil_img,
   post_img,
-  isLike,
 }) => {
-  const [Like, setLike] = useState(isLike);
-  const [FollowState, setFollowState] = useState(isFollowing);
+  const [Like, setLike] = useState(null);
+  const [FollowState, setFollowState] = useState(null);
 
+  useEffect(() => {
+    setFollowState(Follow.followings.some(e => e.username === username))
+    setLike(Likes.data.includes(id))
+  }, []);
   return (
     <div className="card p-2 md:p-1.5 bg-white border h-fit rounded-xl group md:hover:scale-105 md:hover:motion-safe:duration-500 md:hover:shadow-2xl">
       <div className="h-80 lg:h-60 rounded-xl overflow-hidden flex flex-col shadow-lg">
@@ -192,7 +185,7 @@ const Card = ({
             </svg>
           </a>
         )}
-        <Link href={`/${username}/${Math.floor(Math.random() * 10000)}`}>
+        <Link href={`/${username}/${id}`}>
           <a className="absolute translate-y-32 lg:translate-y-24 py-1.5 px-3 rounded-full bg-white font-semibold w-fit text-sm self-center mt-5 hidden group-hover:block hover:scale-105 hover:motion-safe:duration-500">
             Details
           </a>

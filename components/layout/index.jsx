@@ -3,6 +3,7 @@ import { useState } from "react";
 import Modal from "../modal";
 import Logout from "../auth/logout";
 import User from "../../db/user.json";
+import Follow from "../../db/follow.json"
 
 export default function Layout({ children }) {
   const [IsModalOpen, setIsModalOpen] = useState(false);
@@ -14,7 +15,7 @@ export default function Layout({ children }) {
       <nav className="border-b fixed w-screen glass z-40">
         <div className="container mx-auto flex justify-between px-3">
           <div className="user flex items-center gap-3 py-4">
-            <div className="user-image w-12 h-12 flex cursor-pointer group">
+            <div className="user-image w-12 h-12 flex cursor-pointer group text-sm font-semibold">
               <Image
                 className="object-cover rounded-md"
                 src={account[0].profile_image}
@@ -25,9 +26,26 @@ export default function Layout({ children }) {
                 placeholder="blur"
               />
               <div className="user-action hidden group-hover:block hover:block absolute translate-y-12 pt-3 cursor-default z-10">
-                <div className="border bg-white p-5 rounded-lg shadow-lg">
+                <div className="flex flex-col border bg-white p-5 rounded-lg shadow-lg">
+                  <div className="mb-5 flex gap-4 pb-3 border-b">
+                    <a className="px-2 flex flex-col items-center py-2 cursor-pointer rounded-md hover:bg-gray-50">
+                      <div>Following</div>
+                      <div>{Follow.followings.length}</div>
+                    </a>
+                    <a className="px-2 flex flex-col items-center py-2 cursor-pointer rounded-md hover:bg-gray-50">
+                      <div>Followers</div>
+                      <div>{Follow.followers.length}</div>
+                    </a>
+                  </div>
+                  <div className="flex flex-col gap-3 border-b pb-5 mb-3">
+                    {
+                      ['User Detail', 'Likes', 'My Showcase', 'Setting'].map((list) => (
+                        <a key={list} className="py-1.5 px-1 hover:pl-5 cursor-pointer hover:motion-safe:duration-500">{list}</a>
+                      ))
+                    }
+                  </div>
                   <a
-                    className="px-4 py-1 rounded-lg text-red-500 font-semibold hover:bg-red-50 cursor-pointer"
+                    className="w-auto py-1 text-center rounded-lg text-red-500 font-semibold hover:bg-red-50 cursor-pointer"
                     onClick={() => {
                       Logout();
                     }}

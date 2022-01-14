@@ -1,0 +1,22 @@
+{
+  "followings":[
+    {
+      "id": 1,
+      "username": "nayanika",
+      "fullname": "Adinda Nayanika",
+      "profil_img": "/cdn/public/nayanika.webp"
+    }
+  ],
+  "followers":[{
+    "id": 1,
+    "username": "nayanika",
+    "fullname": "Adinda Nayanika",
+    "profil_img": "/cdn/public/nayanika.webp"
+  },
+  {
+    "id": 2,
+    "username": "aurelien",
+    "fullname": "Aurelien Aditya",
+    "profil_img": "/cdn/public/aurelien.webp"
+  }]
+}
