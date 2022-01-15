@@ -1,7 +1,8 @@
 import Image from "next/image";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import UpdatesData from "../../db/updates.json";
 import Link from "next/link";
+import Follow from "../../db/follow.json";
 
 export default function Updates() {
   const [HideUpdates, setHideUpdates] = useState(false);
@@ -53,11 +54,10 @@ export default function Updates() {
               <UpdatesCard
                 username={e.username}
                 fullname={e.fullname}
-                isFollowing={e.isFollowing}
                 profile_img={e.profil_img}
-                post1={e.post_img_1}
-                post2={e.post_img_2}
-                post3={e.post_img_3}
+                post1={e.post_img[0]}
+                post2={e.post_img[1]}
+                post3={e.post_img[2]}
               />
             </div>
           ))}
@@ -70,15 +70,18 @@ export default function Updates() {
 const UpdatesCard = ({
   username,
   fullname,
-  isFollowing,
   profile_img,
   post1,
   post2,
   post3,
 }) => {
   const [Following, setFollowing] = useState(false);
-  const [Follow, setFollow] = useState(false);
-  const [FollowState, setFollowState] = useState(isFollowing);
+  const [Followers, setFollowers] = useState(false);
+  const [FollowState, setFollowState] = useState(null);
+
+  useEffect(() => {
+    setFollowState(Follow.followings.some((e) => e.username === username));
+  }, []);
 
   return (
     <div className="content pt-2 max-w-max scale-up-hor-left">
@@ -100,10 +103,10 @@ const UpdatesCard = ({
       </div>
       <div className="flex gap-1 pl-8 mb-2">
         <div className="h-20 w-20 rounded-md overflow-hidden">
-          <Link href={`/${username}/${Math.floor(Math.random() * 10000)}`}>
+          <Link href={`/${username}/${post1.id}`}>
             <a>
               <Image
-                src={post1}
+                src={post1.cdn_img}
                 alt={`${username}_post1`}
                 height={100}
                 width={100}
@@ -116,10 +119,10 @@ const UpdatesCard = ({
           </Link>
         </div>
         <div className="h-20 w-20 rounded-md overflow-hidden">
-          <Link href={`/${username}/${Math.floor(Math.random() * 10000)}`}>
+          <Link href={`/${username}/${post2.id}`}>
             <a>
               <Image
-                src={post2}
+                src={post2.cdn_img}
                 alt={`${username}_post2`}
                 height={100}
                 width={100}
@@ -132,10 +135,10 @@ const UpdatesCard = ({
           </Link>
         </div>
         <div className="h-20 w-20 rounded-md overflow-hidden">
-          <Link href={`/${username}/${Math.floor(Math.random() * 10000)}`}>
+          <Link href={`/${username}/${post3.id}`}>
             <a>
               <Image
-                src={post3}
+                src={post3.cdn_img}
                 alt={`${username}_post3`}
                 height={100}
                 width={100}
@@ -173,7 +176,7 @@ const UpdatesCard = ({
                   className="py-1 px-4 rounded-full bg-gray-200 font-semibold"
                   onClick={() => {
                     setFollowState(false);
-                    setFollow(false);
+                    setFollowers(false);
                     setFollowing(false);
                   }}
                 >
@@ -195,14 +198,14 @@ const UpdatesCard = ({
             <a
               className="text-blue-500 cursor-pointer"
               onClick={() => {
-                setFollow(Follow ? false : true);
+                setFollowers(Followers ? false : true);
               }}
             >
               Follow
             </a>
             <div
               className={`${
-                Follow ? "flex" : "hidden"
+                Followers ? "flex" : "hidden"
               } absolute translate-y-6 rounded-lg border p-2 bg-white flex-col gap-1 items-center`}
             >
               <span>Follow ?</span>
@@ -211,7 +214,7 @@ const UpdatesCard = ({
                   className="py-1 px-4 rounded-full bg-gray-200 font-semibold"
                   onClick={() => {
                     setFollowState(true);
-                    setFollow(false);
+                    setFollowers(false);
                     setFollowing(false);
                   }}
                 >
@@ -220,7 +223,7 @@ const UpdatesCard = ({
                 <button
                   className="py-1 px-4 rounded-full bg-red-200 font-semibold"
                   onClick={() => {
-                    setFollow(false);
+                    setFollowers(false);
                   }}
                 >
                   No

@@ -5,28 +5,80 @@
       "username":"nayanika",
       "fullname":"Adinda Nayanika",
       "profil_img":"/cdn/public/nayanika.webp",
-      "post_img": ["/cdn/public/pic1.webp","/cdn/public/pic2.webp","/cdn/public/pic3.webp"]
+      "post_img": [
+        {
+          "id": 135,
+          "cdn_img":"/cdn/public/pic1.webp"
+        },
+        {
+          "id": 136,
+          "cdn_img":"/cdn/public/pic2.webp"
+        },
+        {
+        "id": 137,
+        "cdn_img":"/cdn/public/pic3.webp"
+        }
+      ]
     },
     {
       "index":1,
       "username":"aurelien",
       "fullname":"Aurelien Aditya",
       "profil_img":"/cdn/public/aurelien.webp",
-      "post_img": ["/cdn/public/pic4.webp","/cdn/public/pic5.webp","/cdn/public/pic6.webp"]
+      "post_img": [
+        {
+          "id": 132,
+          "cdn_img":"/cdn/public/pic4.webp"
+        },
+        {
+          "id": 133,
+          "cdn_img":"/cdn/public/pic5.webp"
+        },
+        {
+        "id": 134,
+        "cdn_img":"/cdn/public/pic6.webp"
+        }
+      ]
     },
     {
       "index":2,
       "username":"fanwar",
       "fullname":"Ferry Lim",
       "profil_img":"/cdn/public/ferry.webp",
-      "post_img": ["/cdn/public/pic7.webp","/cdn/public/pic8.webp","/cdn/public/pic9.webp"]
+      "post_img": [
+        {
+          "id": 129,
+          "cdn_img":"/cdn/public/pic7.webp"
+        },
+        {
+          "id": 130,
+          "cdn_img":"/cdn/public/pic8.webp"
+        },
+        {
+        "id": 131,
+        "cdn_img":"/cdn/public/pic9.webp"
+        }
+      ]
     },
     {
       "index":3,
       "username":"lizza",
       "fullname":"Lizza Mansry",
       "profil_img":"/cdn/public/lizza.webp",
-      "post_img": ["/cdn/public/pic10.webp","/cdn/public/pic12.webp","/cdn/public/pic13.webp"]
+      "post_img": [
+        {
+          "id": 126,
+          "cdn_img":"/cdn/public/pic10.webp"
+        },
+        {
+          "id": 127,
+          "cdn_img":"/cdn/public/pic12.webp"
+        },
+        {
+        "id": 128,
+        "cdn_img":"/cdn/public/pic13.webp"
+        }
+      ]
     },
     {
       "index":4,
@@ -37,16 +89,16 @@
         {
           "id": 123,
           "cdn_img":"/cdn/public/pic14.webp"
-      },
-      {
-        "id": 124,
-        "cdn_img":"/cdn/public/pic15.webp"
-    },
-    {
-      "id": 125,
-      "cdn_img":"/cdn/public/pic16.webp"
-  }
-    ]
+        },
+        {
+          "id": 124,
+          "cdn_img":"/cdn/public/pic15.webp"
+        },
+        {
+        "id": 125,
+        "cdn_img":"/cdn/public/pic16.webp"
+        }
+      ]
     }
   ]
 }

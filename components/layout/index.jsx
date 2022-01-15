@@ -3,7 +3,7 @@ import { useState } from "react";
 import Modal from "../modal";
 import Logout from "../auth/logout";
 import User from "../../db/user.json";
-import Follow from "../../db/follow.json"
+import Follow from "../../db/follow.json";
 
 export default function Layout({ children }) {
   const [IsModalOpen, setIsModalOpen] = useState(false);
@@ -38,11 +38,16 @@ export default function Layout({ children }) {
                     </a>
                   </div>
                   <div className="flex flex-col gap-3 border-b pb-5 mb-3">
-                    {
-                      ['User Detail', 'Likes', 'My Showcase', 'Setting'].map((list) => (
-                        <a key={list} className="py-1.5 px-1 hover:pl-5 cursor-pointer hover:motion-safe:duration-500">{list}</a>
-                      ))
-                    }
+                    {["User Detail", "Likes", "My Showcase", "Setting"].map(
+                      (list) => (
+                        <a
+                          key={list}
+                          className="py-1.5 px-1 hover:pl-5 cursor-pointer hover:motion-safe:duration-500"
+                        >
+                          {list}
+                        </a>
+                      )
+                    )}
                   </div>
                   <a
                     className="w-auto py-1 text-center rounded-lg text-red-500 font-semibold hover:bg-red-50 cursor-pointer"
@@ -252,7 +257,11 @@ export default function Layout({ children }) {
         </div>
       </footer>
       {IsModalOpen ? (
-        <Modal setIsModalOpen={setIsModalOpen} setModal={"upload_form"} />
+        <Modal
+          setIsModalOpen={setIsModalOpen}
+          setModal={"upload_form"}
+          setModalName={"Upload"}
+        />
       ) : (
         <div className="hidden"></div>
       )}
