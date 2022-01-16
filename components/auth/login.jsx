@@ -2,6 +2,7 @@ import Link from "next/link";
 import Button from "../button";
 import { useState } from "react";
 import { useRouter } from "next/router";
+import axios from "axios";
 import { useFormik } from "formik";
 import * as yup from "yup";
 const validationSchema = yup.object().shape({
@@ -15,6 +16,20 @@ import Database from "../../db/user.json";
 export default function Login({ setForm, setAlert }) {
   const [ShowPassword, setShowPassword] = useState(false);
   const router = useRouter();
+  const loginApi = async (e) => {
+    const hit = await axios
+      .post("http://localhost:5000/login", {
+        email: "zikrimansyursyah@gmail.com",
+        password: "password123456",
+      })
+      .then(function (response) {
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+    console.log(hit);
+  };
 
   const handleLogin = async (e) => {
     const { email, password } = formik.values;
@@ -151,7 +166,7 @@ export default function Login({ setForm, setAlert }) {
           Sign in
         </Button>
       </form>
-      <Button isPrimary={false} type={"button"}>
+      <Button isPrimary={false} type={"button"} clicked={loginApi}>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="22"

@@ -9,6 +9,7 @@ export default function Layout({ children }) {
   const [IsModalOpen, setIsModalOpen] = useState(false);
   const email = sessionStorage.getItem("email");
   const account = User.data.filter((v) => v.email === email) || [];
+  console.log(account);
 
   return (
     <>
