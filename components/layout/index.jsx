@@ -1,15 +1,35 @@
 import Image from "next/image";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Modal from "../modal";
-import Logout from "../auth/logout";
-import User from "../../db/user.json";
-import Follow from "../../db/follow.json";
+import { logout } from "../../services/auth";
+import jwt from "jsonwebtoken";
 
 export default function Layout({ children }) {
-  const [IsModalOpen, setIsModalOpen] = useState(false);
-  const email = sessionStorage.getItem("email");
-  const account = User.data.filter((v) => v.email === email) || [];
-  console.log(account);
+  const [OpenModal, setOpenModal] = useState({
+    isOpen: false,
+    type: "",
+    modal_name: "",
+  });
+  const [Data, setData] = useState(payload);
+
+  function payload() {
+    const userSession = document.cookie.match(
+      new RegExp("(^| )user_session=([^;]+)")
+    );
+    try {
+      const payload = jwt.verify(userSession[2], "lumba-lumba");
+      return payload;
+    } catch (error) {}
+  }
+
+  function setName(name) {
+    const fullname = name.split(" ");
+    if (fullname.length < 2) {
+      return fullname[0];
+    } else {
+      return `${fullname[0]} ${fullname[1]}`;
+    }
+  }
 
   return (
     <>
@@ -19,7 +39,7 @@ export default function Layout({ children }) {
             <div className="user-image w-12 h-12 flex cursor-pointer group text-sm font-semibold">
               <Image
                 className="object-cover rounded-md"
-                src={account[0].profile_image}
+                src={Data.profile_image}
                 alt="profile"
                 width={100}
                 height={100}
@@ -31,11 +51,11 @@ export default function Layout({ children }) {
                   <div className="mb-5 flex gap-4 pb-3 border-b">
                     <a className="px-2 flex flex-col items-center py-2 cursor-pointer rounded-md hover:bg-gray-50">
                       <div>Following</div>
-                      <div>{Follow.followings.length}</div>
+                      <div>{Data.followings}</div>
                     </a>
                     <a className="px-2 flex flex-col items-center py-2 cursor-pointer rounded-md hover:bg-gray-50">
                       <div>Followers</div>
-                      <div>{Follow.followers.length}</div>
+                      <div>{Data.followers}</div>
                     </a>
                   </div>
                   <div className="flex flex-col gap-3 border-b pb-5 mb-3">
@@ -51,9 +71,21 @@ export default function Layout({ children }) {
                     )}
                   </div>
                   <a
+                    className="w-auto mb-3 py-1 text-center rounded-lg text-gray-500 font-semibold hover:bg-red-50 cursor-pointer"
+                    onClick={() => {
+                      setOpenModal({
+                        isOpen: true,
+                        type: "delete_account",
+                        modal_name: "Delete Account",
+                      });
+                    }}
+                  >
+                    Delete Account
+                  </a>
+                  <a
                     className="w-auto py-1 text-center rounded-lg text-red-500 font-semibold hover:bg-red-50 cursor-pointer"
                     onClick={() => {
-                      Logout();
+                      logout();
                     }}
                   >
                     Logout
@@ -62,9 +94,11 @@ export default function Layout({ children }) {
               </div>
             </div>
             <div className="flex flex-col">
-              <span className="name font-semibold">{account[0].fullname}</span>
+              <span className="name font-semibold">
+                {setName(Data.fullname)}
+              </span>
               <span className="job text-sm font-medium text-gray-400">
-                {account[0].job}
+                {Data.job}
               </span>
             </div>
           </div>
@@ -150,7 +184,11 @@ export default function Layout({ children }) {
             </a>
             <button
               onClick={() => {
-                setIsModalOpen(true);
+                setOpenModal({
+                  isOpen: true,
+                  type: "upload_form",
+                  modal_name: "Upload",
+                });
               }}
               className="bg-blue-400 px-7 py-3 h-10 flex items-center rounded-full text-white font-semibold hover:bg-blue-500"
             >
@@ -257,12 +295,8 @@ export default function Layout({ children }) {
           <div className="mt-12">Documentation</div>
         </div>
       </footer>
-      {IsModalOpen ? (
-        <Modal
-          setIsModalOpen={setIsModalOpen}
-          setModal={"upload_form"}
-          setModalName={"Upload"}
-        />
+      {OpenModal.isOpen ? (
+        <Modal setModal={OpenModal} setOpenModal={setOpenModal} />
       ) : (
         <div className="hidden"></div>
       )}

@@ -1,6 +1,7 @@
 import Button from "../button";
 import { useState } from "react";
 import { useFormik } from "formik";
+import { regis } from "../../services/auth";
 import * as yup from "yup";
 const validationSchema = yup.object().shape({
   email: yup.string().email().required("Email salah"),
@@ -13,33 +14,23 @@ const validationSchema = yup.object().shape({
 //hanya data dummy, cek consume api
 import Database from "../../db/user.json";
 
-export default function Register({ setForm, setAlert }) {
+export default function Register({ setForm, setAlert, setLoadState }) {
   const [ShowPassword, setShowPassword] = useState(false);
   const [ShowPassword2, setShowPassword2] = useState(false);
 
   const handleRegis = async () => {
-    const { email, username, password } = formik.values;
-    const user =
-      (await Database.data.filter(
-        (v) => v.email === email || v.username === username
-      )) || [];
-    if (user.length > 0) {
-      setAlert({
-        type: false,
-        message: "User already exist",
-        isOpen: true,
-      });
-    } else {
-      const id = Math.floor(Math.random() * Date.now());
-      Database.data.push({
-        id: id,
-        email: email,
-        username: username,
-        password: password,
-      });
+    setLoadState(true);
+    const response = await regis({
+      email: formik.values.email,
+      username: formik.values.username,
+      password: formik.values.password,
+    });
+    setLoadState(false);
+    console.log(response);
+    if (response.status === 200) {
       setAlert({
         type: true,
-        message: "Register Success",
+        message: response.data.message,
         isOpen: true,
       });
       setForm(true);

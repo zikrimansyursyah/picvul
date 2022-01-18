@@ -6,6 +6,7 @@ import Alert from "../alert";
 
 export default function Auth() {
   const [Form, setForm] = useState(true);
+  const [LoadState, setLoadState] = useState(false);
   const [TheAlert, setTheAlert] = useState({
     type: false,
     message: "",
@@ -16,9 +17,17 @@ export default function Auth() {
     <div className="w-screen h-screen flex">
       <div className="w-full md:w-1/2 flex flex-col justify-center items-center">
         {Form ? (
-          <Login setForm={setForm} setAlert={setTheAlert} />
+          <Login
+            setForm={setForm}
+            setAlert={setTheAlert}
+            setLoadState={setLoadState}
+          />
         ) : (
-          <Register setForm={setForm} setAlert={setTheAlert} />
+          <Register
+            setForm={setForm}
+            setAlert={setTheAlert}
+            setLoadState={setLoadState}
+          />
         )}
       </div>
       <div className="w-1/2 h-screen hidden md:block">
@@ -44,6 +53,19 @@ export default function Auth() {
       </div>
       {TheAlert.isOpen ? (
         <Alert setAlert={TheAlert} isOpen={setTheAlert} />
+      ) : (
+        <div className="hidden"></div>
+      )}
+      {LoadState ? (
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 p-5 rounded-lg shadow-2xl font-semibold bg-[#FCFCFC] flex flex-col items-center">
+          <Image
+            src="/cdn/webassets/loading-state.gif"
+            alt="loading"
+            width={100}
+            height={100}
+          />
+          Processing...
+        </div>
       ) : (
         <div className="hidden"></div>
       )}
